@@ -160,6 +160,11 @@ REST_FRAMEWORK = {
         "user" : "20/minute",
         "one": "1/minute",
     },
+    
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.OrderingFilter',
+        'rest_framework.filters.SearchFilter',
+    ],
     # Set the default page size to 2
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,

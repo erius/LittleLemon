@@ -25,6 +25,9 @@ def index(request):
 class MenuItemsView(generics.ListCreateAPIView):
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
+    ordering_fields = ['price', 'inventory']
+    filterset_fields = ['price', 'inventory']
+    search_fields = ['title']
 
 
 class SingleMenuItemView(generics.RetrieveUpdateAPIView, generics.DestroyAPIView):
