@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'restaurant',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +135,34 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    """ 'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # Installed with pipenv install djangorestframework-xml
+        'rest_framework_xml.renderers.XMLRenderer',
+    ], """
+    # Set default authentication classes
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    # This was breaking djoser
+    # 'DEFAULT_THROTTLE_CLASSES': {
+    #     'one': '1/minute',
+    #     'anon': '2/minute',
+    #     'user': '5/minute',
+    #     'ten': '10/minute',
+    # },
+    'DEFAULT_THROTTLE_RATES' : {
+        "anon" : "10/minute",
+        "user" : "20/minute",
+        "one": "1/minute",
+    },
+    # Set the default page size to 2
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+}
+#add the following line
+DJOSER={"USER_ID_FIELD":"username"}
