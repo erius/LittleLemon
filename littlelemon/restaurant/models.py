@@ -7,8 +7,12 @@ class Menu(models.Model):
     inventory=models.IntegerField()
     
     
-    def __str__(self): 
-        return self.title
+    """ def __str__(self): 
+        return self.title """
+    
+    #add the following method in Menu class
+def __str__(self):
+    return f'{self.title} : {str(self.price)}'
     
     
     
